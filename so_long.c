@@ -6,11 +6,12 @@
 /*   By: jfernand <jfernand@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 15:31:07 by jfernand          #+#    #+#             */
-/*   Updated: 2025/05/16 19:44:18 by jfernand         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:36:20 by jfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <signal.h>
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -20,68 +21,37 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+
 int	main(void)
 {
 	void	*mlx;
 	void	*mlx_win;
 	t_data	img;
 	int		x;
-	int		x2;
 	int		y;
+	int		color;
 
 	y = 10;
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
 	img.img = mlx_new_image(mlx, 1920, 1080);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	while (y < 40)
+	color = create_trgb(0, 0xFF, 0xC0, 0xCB);
+	int i = 1;
+	while (y < 1000)
 	{
 		x = 10;
-		while (x < 40)
+		while (x < 1000)
 		{
-			my_mlx_pixel_put(&img, x, y, 0x00FF0000);
+			my_mlx_pixel_put(&img, x, y, (color));
 			x++;
+			i++;
 		}
-		y++;
-	}
-	y = 10;
-	x2 = 99;
-	while (y < 40)
-	{
-		x = 100;
-		while (x > x2)
-		{
-			my_mlx_pixel_put(&img, x, y, 0x00FF0000);
-			x--;
-		}
-		x2--;
-		y++;
-	}
-	y = 10;
-	x2 = 101;
-	while (y < 40)
-	{
-		x = 100;
-		while (x < x2)
-		{
-			my_mlx_pixel_put(&img, x, y, 0x00FF0000);
-			x++;
-		}
-		x2++;
-		y++;
-	}
-	y = 10;
-	x2 = 210;
-	while (y < 40)
-	{
-		x = 200;
-		while (x < x2)
-		{
-			my_mlx_pixel_put(&img, x, y, 0x00FF0000);
-			x++;
-		}
-		x2++;
-		x2++;
 		y++;
 	}
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
