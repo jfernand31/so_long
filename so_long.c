@@ -50,13 +50,6 @@ int	key_press(int keycode, t_vars *vars)
 	return (0);
 }
 
-int window_resize(void *param)
-{
-    // param is a pointer to XConfigureEvent struct
-    XConfigureEvent *event = (XConfigureEvent *)param;
-    ft_printf("Window resized to: %d x %d\n", event->width, event->height);
-    return 0;
-}
 
 int	main(void)
 {
@@ -91,6 +84,5 @@ int	main(void)
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 	mlx_hook(vars.win, 17, 0, close_win, &vars);
 	mlx_hook(vars.win, 2, 1L << 0, key_press, &vars);
-	mlx_hook(vars.win, 12, (1L << 15), window_resize, &vars);
 	mlx_loop(vars.mlx);
 }
