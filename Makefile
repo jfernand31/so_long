@@ -6,7 +6,7 @@
 #    By: jfernand <jfernand@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/02 19:45:19 by jfernand          #+#    #+#              #
-#    Updated: 2025/05/16 18:46:06 by jfernand         ###   ########.fr        #
+#    Updated: 2025/06/25 19:28:50 by jfernand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ CC=@cc
 # Flags for compiler
 CCFLAGS=-Wall      \
         -Wextra    \
-        -Werror    \
+		-Werror    \
 		-g         \
 		-I.        \
 		-I$(MINILIBX) \

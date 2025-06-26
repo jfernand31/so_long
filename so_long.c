@@ -6,7 +6,7 @@
 /*   By: jfernand <jfernand@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 15:31:07 by jfernand          #+#    #+#             */
-/*   Updated: 2025/06/20 19:56:56 by jfernand         ###   ########.fr       */
+/*   Updated: 2025/06/25 19:39:21 by jfernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,19 @@ int	close_win(t_vars *vars)
 
 int	key_press(int keycode, t_vars *vars)
 {
-	if (keycode == 65307) // Escape key
+    if (keycode == 65307) // Escape key
 	{
 		close_win(vars);
 		exit(0);
 	}
 	return (0);
 }
-
-
+int key_hook(int keycode, t_vars *vars)
+{
+    (void)vars;
+    ft_printf("Key pressed: %d\n", keycode);
+    return (0);
+}
 int	main(void)
 {
 	//void	*mlx;
@@ -80,7 +84,9 @@ int	main(void)
 			i++;
 		}
 		y++;
-	}
+	
+    }
+    mlx_key_hook(vars.win, key_hook, &vars);
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 	mlx_hook(vars.win, 17, 0, close_win, &vars);
 	mlx_hook(vars.win, 2, 1L << 0, key_press, &vars);
